@@ -152,6 +152,7 @@ const struct spi_nor_info spi_nor_ids[] = {
 	{ AT25("at25df641",   0x1f4b00,  128), },
 	{ AT25("at25df512b",  0x1f6500,    1), },
 	{ AT25("at25df512b",  0x1f6501,    1), },
+	{ AT25("at25sf041",   0x1f8401,    8), },
 
 	/* Micron */
 	{ M25P("m25p05",     0x202010,    2, 32768U), },
