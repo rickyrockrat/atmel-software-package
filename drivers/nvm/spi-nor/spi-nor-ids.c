@@ -78,6 +78,22 @@
 	.page_size = 256,			\
 	.flags = SNOR_SECT_4K | SNOR_NO_4BAIS | SNOR_SKIP_SFDP | SNOR_SECT_32K
 
+#define MX25(_name, _jedec_id, _n_sectors)      \
+        .name = _name,                          \
+        ID5(_jedec_id, 0),                      \
+        .sector_size = 65536U,                  \
+        .n_sectors = (_n_sectors),              \
+        .page_size = 256,                       \
+        .flags = SNOR_SECT_4K | SNOR_NO_4BAIS
+
+#define MT25QL(_name, _jedec_id, _n_sectors, _s_sector)	\
+	.name = _name,					\
+	ID5(_jedec_id, 0),				\
+	.sector_size = (_s_sector),			\
+	.n_sectors = (_n_sectors),			\
+	.page_size = 256,				\
+	.flags = SNOR_NO_4BAIS | SNOR_SKIP_SFDP
+
 #define M25P(_name, _jedec_id, _n_sectors, _s_sector)	\
 	.name = _name,					\
 	ID5(_jedec_id, 0),				\
@@ -139,7 +155,9 @@
  *----------------------------------------------------------------------------*/
 
 const struct spi_nor_info spi_nor_ids[] = {
-	/* Atmel */
+	/* Macronix */
+	{ MX25("mx25l25635f", 0xc22019,  512), },
+        /* Atmel */
 	{ AT25("at25df021",   0x1f4300,    4), },
 	{ AT25("at25df041a",  0x1f4401,    8), },
 	{ AT25("at25df018a",  0x1f4501,   16), },
@@ -152,6 +170,7 @@ const struct spi_nor_info spi_nor_ids[] = {
 	{ AT25("at25df641",   0x1f4b00,  128), },
 	{ AT25("at25df512b",  0x1f6500,    1), },
 	{ AT25("at25df512b",  0x1f6501,    1), },
+	{ AT25("at25sf041",   0x1f8401,    8), },
 
 	/* Micron */
 	{ M25P("m25p05",     0x202010,    2, 32768U), },
@@ -162,6 +181,7 @@ const struct spi_nor_info spi_nor_ids[] = {
 	{ M25P("m25p16",     0x202015,   32, 65536U), },
 	{ M25P("m25p32",     0x202016,   64, 65536U), },
 	{ M25P("m25p64",     0x202017,  128, 65536U), },
+	{ MT25QL("mt25ql128aba", 0x20ba18, 256, 65536U), },
 	{ N25Q("n25q032ax1", 0x20bb16,   64), },
 	{ N25Q("n25q032ax3", 0x20ba16,   64), },
 	{ N25Q("n25q064ax1", 0x20bb17,  128), },
